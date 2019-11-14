@@ -29,8 +29,18 @@ describe('server', () => {
     describe('[POST] / endpoint', () => {
         it('post /users with supertest syntax', async () => {
             return request(server).post('/users')
-                .send({name: 'Kiyani', department: 'student'})
+                .send({name: 'Esther', department: 'student'})
                 .expect(201)
+                .expect('Content-Type', /json/)
+        })
+    })
+
+    describe('[DELETE] / endpoint', () => {
+        it('delete /users/:id with supertest syntax', async () => {
+            await request(server).post('/users')
+                .send({name: 'Kiyani', department: 'student'})
+            return request(server).delete('/users/1')
+                .expect(200)
                 .expect('Content-Type', /json/)
         })
     })
