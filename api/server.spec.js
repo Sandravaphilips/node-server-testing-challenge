@@ -44,4 +44,15 @@ describe('server', () => {
                 .expect('Content-Type', /json/)
         })
     })
+
+    describe('[UPDATE] / endpoint', () => {
+        it('update /users/:id with supertest syntax', async () => {
+            await request(server).post('/users')
+                .send({name: 'Kiyani', department: 'student'})
+            return request(server).put('/users/1')
+                .send({name: 'Hester', department: 'student'})
+                .expect(200)
+                .expect('Content-Type', /json/)
+        })
+    })
 })
